@@ -13,7 +13,8 @@ pipeline {
         }
         stage('retag and push') {
             steps {
-                sh 'docker pull busybox'
+                sh 'docker build -t avital1093/busybox:latest -t avital1093/busybox:1.${BUILD_NUMBER} ./busybox-helm'
+                //sh 'docker pull busybox'
                 sh 'docker tag busybox:latest avital1093/busybox:latest'
                 //sh 'docker tag busybox:latest avital1093/busybox:1.${BUILD_NUMBER}'
                 sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
