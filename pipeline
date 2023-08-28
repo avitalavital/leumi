@@ -11,22 +11,14 @@ pipeline {
                 sh 'git clone https://github.com/nikhilgorantla/busybox-helm.git'
             }
         }
-        stage('Install Helm') {
-            steps {
-                script {
-                    sh '''
-                    curl https://baltocdn.com/helm/signing.asc | gpg --dearmor | sudo tee /usr/share/keyrings/helm.gpg > /dev/null
-                    sudo apt-get install apt-transport-https --yes
-                    echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/helm.gpg] https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-                    sudo apt-get update
-                    sudo apt-get install helm
-                    '''
-                }
-            }
-        }
         stage('retag and push') {
             steps {
-                sh 'git clone https://github.com/nikhilgorantla/busybox-helm.git'
+                sh 'docker pull busybox'
+                sh 'docker tag busybox:latest avital1093/busybox:latest'
+                //sh 'docker tag busybox:latest avital1093/busybox:1.${BUILD_NUMBER}'
+                sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                sh 'docker push avital1093/busybox:latest'
+                //sh "docker push avital1093/busybox:1.${BUILD_NUMBER}"
             }
         }
     }
