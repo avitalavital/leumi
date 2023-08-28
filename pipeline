@@ -1,2 +1,15 @@
 pipeline {
     agent any
+    stages {
+        stage('Cleanup') {
+            steps {
+                sh 'rm -r busybox'
+                sh 'docker image prune -a'
+                sh 'docker container prune -f'
+            }
+        }
+        stage('Clone') {
+            steps {
+                sh 'git clone https://github.com/nikhilgorantla/busybox-helm.git'
+            }
+        }
