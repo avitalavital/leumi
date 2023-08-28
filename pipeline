@@ -4,8 +4,6 @@ pipeline {
         stage('Cleanup') {
             steps {
                 sh 'rm -rf *'
-                sh 'docker image prune -a'
-                sh 'docker container prune -f'
             }
         }
         stage('Clone') {
