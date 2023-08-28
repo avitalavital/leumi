@@ -13,3 +13,5 @@ pipeline {
                 sh 'git clone https://github.com/nikhilgorantla/busybox-helm.git'
             }
         }
+    }
+}
