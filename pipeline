@@ -5,6 +5,7 @@ pipeline {
             steps {
                 sh 'rm -rf *'
                 sh 'whoami'
+                sh 'cat /etc/passwd'
             }
         }
         stage('Clone') {
