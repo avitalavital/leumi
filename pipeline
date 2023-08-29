@@ -33,3 +33,5 @@ pipeline {
         }
     }
 }
+
+//my only problem is that jenkins is runing in a container and i cant connect it to the docker and helm deamons on the host
