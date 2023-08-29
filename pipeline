@@ -14,16 +14,20 @@ pipeline {
         stage('retag and push') {
             steps {
                 sh 'docker pull busybox'
+                // retaging the image
                 sh 'docker tag busybox:latest avitalhen/busybox:latest'
-                //sh 'docker tag busybox:latest avitalhen/busybox:1.${BUILD_NUMBER}'
+                sh 'docker tag busybox:latest avitalhen/busybox:1.${BUILD_NUMBER}'
+                // log in to my docker hub
                 sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
+                // push image to my docker hub
                 sh 'docker push avitalhen/busybox:latest'
-                //sh "docker push avitalhen/busybox:1.${BUILD_NUMBER}"
+                sh "docker push avitalhen/busybox:1.${BUILD_NUMBER}"
             }
         }
         stage('dry-run') {
             steps {
                 sh 'docker pull avitalhen/busybox'
+                // change the docker image to mine and perform a dry-run
                 sh 'helm install avital-busybox -f values.yaml --set image.repository=avitalhen/busybox busybox --dry-run
             }
         }
