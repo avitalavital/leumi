@@ -21,5 +21,11 @@ pipeline {
                 //sh "docker push avital1093/busybox:1.${BUILD_NUMBER}"
             }
         }
+        stage('dry-run') {
+            steps {
+                sh 'docker pull avital1093/busybox'
+                sh 'helm install avital-busybox -f values.yaml --set image.repository=avital1093/busybox busybox --dry-run
+            }
+        }
     }
 }
