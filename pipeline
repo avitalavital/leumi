@@ -4,6 +4,7 @@ pipeline {
         stage('Cleanup') {
             steps {
                 sh 'rm -rf *'
+                sh 'whoami'
             }
         }
         stage('Clone') {
