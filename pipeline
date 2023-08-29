@@ -14,17 +14,17 @@ pipeline {
         stage('retag and push') {
             steps {
                 sh 'docker pull busybox'
-                sh 'docker tag busybox:latest avital1093/busybox:latest'
-                //sh 'docker tag busybox:latest avital1093/busybox:1.${BUILD_NUMBER}'
+                sh 'docker tag busybox:latest avitalhen/busybox:latest'
+                //sh 'docker tag busybox:latest avitalhen/busybox:1.${BUILD_NUMBER}'
                 sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
-                sh 'docker push avital1093/busybox:latest'
-                //sh "docker push avital1093/busybox:1.${BUILD_NUMBER}"
+                sh 'docker push avitalhen/busybox:latest'
+                //sh "docker push avitalhen/busybox:1.${BUILD_NUMBER}"
             }
         }
         stage('dry-run') {
             steps {
-                sh 'docker pull avital1093/busybox'
-                sh 'helm install avital-busybox -f values.yaml --set image.repository=avital1093/busybox busybox --dry-run
+                sh 'docker pull avitalhen/busybox'
+                sh 'helm install avital-busybox -f values.yaml --set image.repository=avitalhen/busybox busybox --dry-run
             }
         }
     }
