@@ -21,7 +21,7 @@ pipeline {
                 withCredentials([usernamePassword(credentialsId: 'docker-cred', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                     sh "echo ${DOCKER_USERNAME}"
                     sh "echo ${DOCKER_PASSWORD}"
-                    sh "docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD"
+                    sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
                     // push image to my docker hub
                     sh 'docker push avitalhen/busybox:latest'
                     sh "docker push avitalhen/busybox:1.${BUILD_NUMBER}"
