@@ -18,7 +18,7 @@ pipeline {
                 sh 'docker tag busybox:latest avitalhen/busybox:latest'
                 sh 'docker tag busybox:latest avitalhen/busybox:1.${BUILD_NUMBER}'
                 // log in to my docker hub
-                sh "docker login -u avitalhen -p '#BananaFuck93'"
+                sh "docker login -u ${DOCKER_USERNAME} -p ${DOCKER_PASSWORD}"
                 // push image to my docker hub
                 sh 'docker push avitalhen/busybox:latest'
                 sh "docker push avitalhen/busybox:1.${BUILD_NUMBER}"
