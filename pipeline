@@ -31,7 +31,7 @@ pipeline {
                 // not shure in need this line but its one of the assignments
                 sh 'docker pull avitalhen/busybox'
                 // change the docker image to mine and perform a dry-run
-                sh 'cd busybox-helm && helm install avital-busybox -f busybox/values.yaml --set image.repository=avitalhen/busybox ./busybox --dry-run'
+                sh 'cd busybox-helm && helm install avital-busybox -f busybox/values.yaml --set image.repository=avitalhen/busybox ./busybox --dry-run --debug'
             }
         }
     }
